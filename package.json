@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
+    "fs-extra": "^11.1.1",
+    "git": "^0.1.5",
+    "solc": "^0.8.7-fixed"
+  },
+  "scripts": {
+    "compile": "yarn solcjs --bin --abi --include-path node_module/ --base-path . -o ."
+  }
+}

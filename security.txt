@@ -1,0 +1,28 @@
+There are some information like private key and rpc provider which we should not mention in our script files or in any other file.
+
+
+
+***For that reason not to mention our private key, rpc url provider or any other sensitive info directly in our script files. we use 
+.env file and the commands of .env files 
+Follow these steps to do the same-
+1.   install dotenv from your terminal [ (yarn add dotenv)- if you are using yarn package, (npm install dotenv --save)- if you are using npm ]
+2.   create a .env file and add your sensitive info in that file. EX- NAME = ambuj
+3.   now import .env file to your scipt using - require("dotenv").config()
+4.   now use the tag process.env.VARIABLE_NAME in place where your info is required EX- process.env.NAME
+
+
+
+***Now while working in more professional domain we use encryption of our private key or other info so as to create one more layer of security (we encrypt our info and set a password for its decryption i.e only the person who knows the password can decrypt the encrypted text and can have the private key)
+Follow these steps to encrypt our info-
+1.   first create a new .js file (can name it encrpytkey , etc)
+2.   in that file import ether library, .env file and fs library
+3.   now create a function and in that function make first const named wallet (using traditional method i.e ethers.wallet()) and pass the private key in argument in this const (process.env.PRIVATE_KEY)
+4.   now create a const which will store the encrypted key (EX const encryptedJson = await wallet.encrypt(password,private key))  encrypt takes two arguments first one is the password to decrypt and the other one is the private key
+5.   now write this encrypted private key in new json file (EX - fs.writeFileSync("./.encryptedPrivateKey.json", encryptedJson))   this takes two arguments first is the file name in which it will write the encrypted key and second is the encrypted private key
+6.   your .json file will be created when you run this .js file
+7.   now we deploy our contract from encrypted private key differently
+8.   we do not create wallet oblect like in normal deployment.....we use .fromEncryptedJsonSync()  this take two arguments one is the const which stores the encrypted key and the other argument is the password (from .env file)
+9.   then we connect our wallet with rpc provider
+
+   NOTE - encryptket.js file is uploaded (it is the file where we write our code to encrypt our key )
+          .encryptedKey.json is also uploaded (it is the file generated after executing the encryptkey.js file)
